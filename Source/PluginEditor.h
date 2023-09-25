@@ -22,6 +22,7 @@ class SynthProjAudioProcessorEditor : public juce::AudioProcessorEditor {
     //==============================================================================
     void paint(juce::Graphics &) override;
     void resized() override;
+    void setSliderParams(juce::Slider &slider);
 
   private:
     juce::Slider attackSlider;

@@ -1,14 +1,12 @@
 
 #pragma once
 
+#include "SynthSound.h"
+#include "SynthVoice.h"
 #include <JuceHeader.h>
 
-class SynthProjAudioProcessor : public juce::AudioProcessor
-#if JucePlugin_Enable_ARA
-    ,
-                                public juce::AudioProcessorARAExtension
-#endif
-{
+
+class SynthProjAudioProcessor : public juce::AudioProcessor {
   public:
     SynthProjAudioProcessor();
     ~SynthProjAudioProcessor() override;
@@ -41,7 +39,7 @@ class SynthProjAudioProcessor : public juce::AudioProcessor
     void getStateInformation(juce::MemoryBlock &destData) override;
     void setStateInformation(const void *data, int sizeInBytes) override;
 
-    // juce::AudioProcessorValueTreeState apvts;
+    juce::AudioProcessorValueTreeState apvts;
 
   private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SynthProjAudioProcessor)

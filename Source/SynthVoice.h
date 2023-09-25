@@ -12,6 +12,7 @@ class SynthVoice : public juce::SynthesiserVoice {
     void controllerMoved(int controllerNumber, int newControllerValue) override;
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
+    void updateADSR(const float attack, const float decay, const float sustain, const float release);
 
   private:
     juce::ADSR adsr;
@@ -23,7 +24,7 @@ class SynthVoice : public juce::SynthesiserVoice {
     bool isPrepared{false};
 
     // The Oscillator we will use to create a sine wave;
-    juce::dsp::Oscillator<float> osc{sineWave};
+    juce::dsp::Oscillator<float> osc{sawWave};
 
     // Gain to adjust the volume so its not too loud
     juce::dsp::Gain<float> gain;
