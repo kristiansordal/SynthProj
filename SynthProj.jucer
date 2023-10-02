@@ -4,6 +4,15 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="davTdN" name="SynthProj">
     <GROUP id="{111BB428-A416-9F3C-65E9-28C3A4423170}" name="Source">
+      <GROUP id="{4636EC14-53A8-3FA4-46C4-2F88AFA77D80}" name="Data">
+        <FILE id="Njao57" name="ADSRData.cpp" compile="1" resource="0" file="Source/Data/ADSRData.cpp"/>
+        <FILE id="hBPMTf" name="ADSRData.h" compile="0" resource="0" file="Source/Data/ADSRData.h"/>
+      </GROUP>
+      <GROUP id="{995EF4D0-97E1-4938-8CA5-C54DD8683C3E}" name="UI">
+        <FILE id="XixmCC" name="ADSRComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ADSRComponent.cpp"/>
+        <FILE id="jJj7zt" name="ADSRComponent.h" compile="0" resource="0" file="Source/UI/ADSRComponent.h"/>
+      </GROUP>
       <FILE id="Ai1Uzg" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="pU7m9z" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
       <FILE id="Y24HNZ" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>

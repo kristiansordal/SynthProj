@@ -5,7 +5,6 @@
 #include "SynthVoice.h"
 #include <JuceHeader.h>
 
-
 class SynthProjAudioProcessor : public juce::AudioProcessor {
   public:
     SynthProjAudioProcessor();

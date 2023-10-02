@@ -1,4 +1,5 @@
 #pragma once
+#include "Data/ADSRData.h"
 #include "SynthSound.h"
 #include <JuceHeader.h>
 
@@ -12,11 +13,10 @@ class SynthVoice : public juce::SynthesiserVoice {
     void controllerMoved(int controllerNumber, int newControllerValue) override;
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
-    void updateADSR(const float attack, const float decay, const float sustain, const float release);
+    void update(const float attack, const float decay, const float sustain, const float release);
 
   private:
-    juce::ADSR adsr;
-    juce::ADSR::Parameters adsrParams;
+    ADSRData adsr;
     juce::AudioBuffer<float> synthBuffer;
     std::function<float(float)> sineWave = [](float x) { return std::sin(x); };
     std::function<float(float)> sawWave = [](float x) { return x / juce::MathConstants<float>::pi; };

@@ -21,11 +21,14 @@ SynthProjAudioProcessor::SynthProjAudioProcessor()
                          .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
                          ),
-      apvts(*this, nullptr, "PARAMETERS", createParams())
+      apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
     synth.addSound(new SynthSound());
-    synth.addVoice(new SynthVoice());
+    for (int i = 0; i < 5; i++) {
+
+        synth.addVoice(new SynthVoice());
+    }
 }
 
 SynthProjAudioProcessor::~SynthProjAudioProcessor() {}
@@ -125,7 +128,7 @@ void SynthProjAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juc
             auto &sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto &release = *apvts.getRawParameterValue("RELEASE");
 
-            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
+            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
 
@@ -166,11 +169,20 @@ juce::AudioProcessorValueTreeState::ParameterLayout SynthProjAudioProcessor::cre
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
         juce::ParameterID{"ATTACK", 1}, "Attack", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID{"DECAY", 2}, "Decay", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 0.1f));
+        juce::ParameterID{"DECAY", 1}, "Decay", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID{"SUSTAIN", 3}, "Sustain", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 1.0f));
+        juce::ParameterID{"SUSTAIN", 1}, "Sustain", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 1.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID{"RELEASE", 4}, "Release", juce::NormalisableRange<float>{0.1f, 3.0f, 0.1f}, 0.4f));
+        juce::ParameterID{"RELEASE", 1}, "Release", juce::NormalisableRange<float>{0.1f, 3.0f, 0.1f}, 0.4f));
+
+    // params.push_back(std::make_unique<juce::AudioParameterFloat>(
+    //     "ATTACK", "Attack", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 0.1f));
+    // params.push_back(std::make_unique<juce::AudioParameterFloat>(
+    //     "DECAY", "Decay", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 0.1f));
+    // params.push_back(std::make_unique<juce::AudioParameterFloat>(
+    //     "SUSTAIN", "Sustain", juce::NormalisableRange<float>{0.1f, 1.0f, 0.1f}, 1.0f));
+    // params.push_back(std::make_unique<juce::AudioParameterFloat>(
+    //     "RELEASE", "Release", juce::NormalisableRange<float>{0.1f, 3.0f, 0.1f}, 0.4f));
 
     return {params.begin(), params.end()};
 }
